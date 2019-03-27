@@ -19,7 +19,7 @@ function(neo_run_aub_target gen gen_name product slices subslices eu_per_ss)
     if(WIN32 OR NOT DEFINED IGDRCL__GMM_LIBRARY_PATH)
         set(aub_cmd_prefix igdrcl_aub_tests)
     else()
-        set(aub_cmd_prefix LD_LIBRARY_PATH=${IGDRCL__GMM_LIBRARY_PATH} IGDRCL_TEST_SELF_EXEC=off $<TARGET_FILE:igdrcl_aub_tests>)
+        set(aub_cmd_prefix ${CMAKE_COMMAND} -E env LD_LIBRARY_PATH=${IGDRCL__GMM_LIBRARY_PATH}:$$LD_LIBRARY_PATH IGDRCL_TEST_SELF_EXEC=off $<TARGET_FILE:igdrcl_aub_tests>)
     endif()
 
     add_custom_command(
